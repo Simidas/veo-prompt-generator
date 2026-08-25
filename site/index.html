@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Veo 3 Prompt Generator — Free, No Sign-Up | Veo 3.1 Ready</title>
+  <meta name="description" content="Build cinematic Veo 3 &amp; Veo 3.1 prompts in seconds. Pick camera, lighting, audio and style — copy a structured prompt or JSON. Free, no account needed.">
+  <link rel="canonical" href="https://veopromptgenerator.com/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Veo 3 Prompt Generator — Free, No Sign-Up">
+  <meta property="og:description" content="Build cinematic Veo 3 &amp; Veo 3.1 prompts in seconds. Pick camera, lighting, audio and style — copy text or JSON.">
+  <meta property="og:url" content="https://veopromptgenerator.com/">
+  <meta name="twitter:card" content="summary">
+  <link rel="stylesheet" href="/assets/style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Veo Prompt Generator",
+    "url": "https://veopromptgenerator.com/",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Any",
+    "description": "Free template-based prompt generator for Google Veo 3 and Veo 3.1 video prompts.",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "Is this Veo 3 prompt generator free?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. Template-based prompt generation is completely free with unlimited use and no account required." } },
+      { "@type": "Question", "name": "Which Veo versions does it support?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Prompts are written for Veo 3 and Veo 3.1, covering camera, lighting, native audio and style controls that both versions understand." } },
+      { "@type": "Question", "name": "Can I paste the output directly into Gemini or Flow?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. Copy the text prompt into Veo in Gemini, Flow or the API. Switch to JSON output for structured use in the API or your own tools." } },
+      { "@type": "Question", "name": "Do I need to sign up?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No. The generator runs entirely in your browser — no sign-up, no email, no data collection." } }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <header class="site">
+    <div class="container">
+      <a class="logo" href="/">VeoPromptGenerator</a>
+      <nav>
+        <a href="/">Generator</a>
+        <a href="/veo-3-prompt-examples">Examples</a>
+        <a href="/veo-3-prompt-guide">Guide</a>
+        <a href="/about">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <h1>Veo 3 Prompt Generator</h1>
+      <p>The fastest way to write Veo prompts that actually look good. Describe your scene, pick camera, lighting, audio and style — copy a ready-to-paste prompt.</p>
+      <span class="badge">Free · No sign-up · Veo 3 &amp; 3.1</span>
+    </section>
+
+    <section class="panel" id="generator" aria-label="Prompt generator">
+      <label class="field-label" for="subject-input">Your scene / subject</label>
+      <textarea id="subject-input" placeholder="e.g. A golden retriever surfs a wave at sunset, spray flying past the lens"></textarea>
+
+      <label class="field-label" for="sel-camera">Camera</label>
+      <select id="sel-camera" aria-describedby="tip-camera"></select>
+      <div class="term-tip" id="tip-camera"></div>
+
+      <label class="field-label" for="sel-lighting">Lighting</label>
+      <select id="sel-lighting" aria-describedby="tip-lighting"></select>
+      <div class="term-tip" id="tip-lighting"></div>
+
+      <label class="field-label" for="sel-audio">Audio</label>
+      <select id="sel-audio" aria-describedby="tip-audio"></select>
+      <div class="term-tip" id="tip-audio"></div>
+
+      <label class="field-label" for="sel-style">Style</label>
+      <select id="sel-style" aria-describedby="tip-style"></select>
+      <div class="term-tip" id="tip-style"></div>
+
+      <label class="field-label">Quick presets</label>
+      <div class="presets">
+        <button class="chip" data-preset="cinematic-trailer" type="button">Cinematic Trailer</button>
+        <button class="chip" data-preset="product-hero" type="button">Product Hero</button>
+        <button class="chip" data-preset="street-food" type="button">Street Food Reel</button>
+        <button class="chip" data-preset="anime-action" type="button">Anime Action</button>
+        <button class="chip" data-preset="cozy-clay" type="button">Cozy Claymation</button>
+        <button class="chip" data-preset="retro-roadtrip" type="button">Retro Roadtrip</button>
+        <button class="chip" data-preset="fpv-warehouse" type="button">FPV Warehouse</button>
+        <button class="chip" data-preset="rain-window" type="button">Rain Window</button>
+      </div>
+
+      <div class="output-head" style="margin-top:22px">
+        <strong>Your prompt</strong>
+        <span class="toggle" role="group" aria-label="Output format">
+          <button type="button" data-format="text" class="active">Text</button>
+          <button type="button" data-format="json">JSON</button>
+        </span>
+      </div>
+      <pre id="prompt-output" aria-live="polite"></pre>
+      <button class="btn-primary" id="copy-btn" type="button">Copy prompt</button>
+    </section>
+
+    <section class="faq prose" aria-label="Frequently asked questions">
+      <h2>FAQ</h2>
+      <details>
+        <summary>Is this Veo 3 prompt generator free?</summary>
+        <p>Yes. Template-based prompt generation is completely free with unlimited use and no account required.</p>
+      </details>
+      <details>
+        <summary>Which Veo versions does it support?</summary>
+        <p>Prompts are written for Veo 3 and Veo 3.1, covering camera, lighting, native audio and style controls that both versions understand. See the <a href="/veo-3-1-prompt-generator">Veo 3.1 generator</a> for version-specific tips.</p>
+      </details>
+      <details>
+        <summary>Can I paste the output directly into Gemini or Flow?</summary>
+        <p>Yes. Copy the text prompt into Veo in Gemini, Flow or the API. Switch to JSON output for structured use in the API or your own tools.</p>
+      </details>
+      <details>
+        <summary>Do I need to sign up?</summary>
+        <p>No. The generator runs entirely in your browser — no sign-up, no email, no data collection.</p>
+      </details>
+    </section>
+
+    <section class="prose">
+      <h2>Write better Veo 3 prompts, faster</h2>
+      <p>Most Veo prompts fail because they describe a subject but leave the camera, lighting and audio to chance. This generator walks you through the four decisions that separate a flat clip from a cinematic one — every option includes a plain-English tip so you learn the vocabulary as you go. When you're ready to go deeper, read the <a href="/veo-3-prompt-guide">prompt structure guide</a> or start from <a href="/veo-3-prompt-examples">20+ copyable examples</a>.</p>
+    </section>
+  </main>
+
+  <footer class="site">
+    <div class="container">
+      <div class="footer-links">
+        <a href="/">Generator</a>
+        <a href="/veo-3-prompt-examples">Examples</a>
+        <a href="/veo-3-prompt-guide">Guide</a>
+        <a href="/about">About</a>
+        <a href="/privacy">Privacy</a>
+        <a href="/terms">Terms</a>
+      </div>
+      <p class="disclaimer">VeoPromptGenerator is an independent tool and is not affiliated with, endorsed by, or sponsored by Google or DeepMind.</p>
+    </div>
+  </footer>
+  <script src="/assets/app.js"></script>
+</body>
+</html>
