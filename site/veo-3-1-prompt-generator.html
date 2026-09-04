@@ -39,43 +39,68 @@
   </header>
 
   <main class="container">
-    <section class="hero">
-      <h1>Veo 3.1 Prompt Generator</h1>
-      <p>Built for Veo 3.1's richer audio and stronger narrative control. Same free generator, tuned for the current model — no sign-up.</p>
-      <span class="badge">Free · No sign-up · Veo 3.1 ready</span>
+    <section class="hero hero-home">
+      <div class="hero-copy">
+        <h1>Veo 3.1 Prompt<br><em>Generator</em></h1>
+        <p>Built for Veo 3.1's richer audio and stronger narrative control. Same free generator, tuned for the current model — no sign-up.</p>
+        <span class="badge">Free · No sign-up · Veo 3.1 ready</span>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="story-frame">
+          <div class="frame-top"><span>SHOT 03 · INT</span><span></span></div>
+          <div class="frame-bottom"><span>NATIVE AUDIO</span><span>3.1</span></div>
+        </div>
+        <span class="scribble">sound, light, movement</span>
+      </div>
     </section>
 
     <section class="panel" id="generator" aria-label="Prompt generator">
-      <label class="field-label" for="subject-input">Your scene / subject</label>
-      <textarea id="subject-input" placeholder="e.g. A barista pours latte art in a sunlit café, saying &quot;first one's on the house&quot;"></textarea>
+      <div class="generator-head">
+        <h2>Your director’s desk</h2>
+        <p>Veo 3.1 responds best when the scene, camera and sound have distinct jobs.</p>
+      </div>
 
-      <label class="field-label" for="sel-camera">Camera</label>
-      <select id="sel-camera" aria-describedby="tip-camera"></select>
-      <div class="term-tip" id="tip-camera"></div>
+      <div class="field-block scene-field">
+        <label class="field-label" for="subject-input">01 · Scene / subject</label>
+        <textarea id="subject-input" placeholder="e.g. A barista pours latte art in a sunlit café, saying &quot;first one's on the house&quot;"></textarea>
+      </div>
 
-      <label class="field-label" for="sel-lighting">Lighting</label>
-      <select id="sel-lighting" aria-describedby="tip-lighting"></select>
-      <div class="term-tip" id="tip-lighting"></div>
+      <div class="control-grid">
+        <div class="field-block">
+          <label class="field-label" for="sel-camera">02 · Camera</label>
+          <select id="sel-camera" aria-describedby="tip-camera"></select>
+          <div class="term-tip" id="tip-camera"></div>
+        </div>
+        <div class="field-block">
+          <label class="field-label" for="sel-lighting">03 · Lighting</label>
+          <select id="sel-lighting" aria-describedby="tip-lighting"></select>
+          <div class="term-tip" id="tip-lighting"></div>
+        </div>
+        <div class="field-block">
+          <label class="field-label" for="sel-audio">04 · Audio</label>
+          <select id="sel-audio" aria-describedby="tip-audio"></select>
+          <div class="term-tip" id="tip-audio"></div>
+        </div>
+        <div class="field-block">
+          <label class="field-label" for="sel-style">05 · Style</label>
+          <select id="sel-style" aria-describedby="tip-style"></select>
+          <div class="term-tip" id="tip-style"></div>
+        </div>
+      </div>
 
-      <label class="field-label" for="sel-audio">Audio</label>
-      <select id="sel-audio" aria-describedby="tip-audio"></select>
-      <div class="term-tip" id="tip-audio"></div>
-
-      <label class="field-label" for="sel-style">Style</label>
-      <select id="sel-style" aria-describedby="tip-style"></select>
-      <div class="term-tip" id="tip-style"></div>
-
-      <label class="field-label">Quick presets</label>
-      <div class="presets">
-        <button class="chip" data-preset="rain-window" type="button">Rain Window</button>
-        <button class="chip" data-preset="cinematic-trailer" type="button">Cinematic Trailer</button>
-        <button class="chip" data-preset="street-food" type="button">Street Food Reel</button>
-        <button class="chip" data-preset="product-hero" type="button">Product Hero</button>
-        <button class="chip" data-preset="cozy-clay" type="button">Cozy Claymation</button>
+      <div class="preset-block">
+        <label class="field-label">Start from a shot card</label>
+        <div class="presets">
+          <button class="chip" data-preset="rain-window" type="button">Rain Window</button>
+          <button class="chip" data-preset="cinematic-trailer" type="button">Cinematic Trailer</button>
+          <button class="chip" data-preset="street-food" type="button">Street Food Reel</button>
+          <button class="chip" data-preset="product-hero" type="button">Product Hero</button>
+          <button class="chip" data-preset="cozy-clay" type="button">Cozy Claymation</button>
+        </div>
       </div>
 
       <div class="output-head" style="margin-top:22px">
-        <strong>Your prompt</strong>
+        <strong>Your finished prompt</strong>
         <span class="toggle" role="group" aria-label="Output format">
           <button type="button" data-format="text" class="active">Text</button>
           <button type="button" data-format="json">JSON</button>

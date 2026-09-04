@@ -1,29 +1,52 @@
-# 06-design — 设计基线（v1）
+# 06-design — 设计基线（v1.1 UI refresh）
 
-日期：2026-08-25 ｜ 视觉真源即 `site/assets/style.css`，本文件记录决策理由（Visual Style Rationale）。
+日期：2026-09-05 ｜ 视觉真源：`site/assets/style.css`
 
-## 风格判断
+## Visual Style Rationale
 
-- 用户是短视频创作者，深色主题 + 高饱和渐变符合工具语境（视频/AI 工具的默认心智），同时避免模仿 Google/Gemini 官方配色（合规要求）。
-- 单列工具布局：移动端优先（主流量来自 TikTok/Reddit 分享），桌面端 generator 居中 720px 内容列 + 侧边输出面板。
+本轮目标是去掉“深色背景 + 紫色渐变 + 居中 Hero + 通用卡片”的 AI SaaS 模板感，同时保持工具效率、英文 SEO 文案和移动端可用性。
 
-## Token
+比较过的方向：
 
-- 背景 `#0b0d14`，面板 `#141826`，边框 `#232a3d`
-- 主色 `#7c5cff`（紫），辅助 `#22d3ee`（青），成功 `#34d399`
-- 文本 `#e8eaf2` / 次级 `#9aa3b8`
-- 字体：系统栈 `-apple-system, "Segoe UI", Roboto, sans-serif`；等宽输出区 `ui-monospace, SFMono-Regular, Menlo`
-- 圆角 12px，阴影仅用于输出卡片；焦点态 2px 主色描边（可访问性）
+1. **海盐轻科技**：白色、海蓝、半透明层。清爽但仍容易落入通用 SaaS 组件语言。
+2. **杂志式电影工作台**：奶油纸张、薄荷绿、珊瑚橙、硬边印刷阴影、不对称分镜构图。最贴合“像导演一样写 prompt”的产品定位，且与同类深色 AI 工具有明显区分。
+3. **瑞士排版工具页**：黑白红、严格网格、高密度编号。识别度高，但对初学创作者略显冷硬。
 
-## 组件清单
+最终采用方向 2。视觉隐喻来自分镜卡、场记板和导演工作台，而不是机器人、星光、霓虹渐变或生成式 AI 素材。
 
-1. Header（sticky）：logo 文本 + nav（Generator / Examples / Guide / About）
-2. Hero：H1 + 副题 + 免费徽章
-3. Generator：subject 文本域 + 4 组 select（camera/lighting/audio/style，含 term tip 行）+ 预设 chips + Text/JSON 切换 + 输出区 + Copy 按钮
-4. FAQ 手风琴（details/summary）
-5. Footer：免责声明 + 法务链接
+## Design tokens
 
-## 状态
+- Canvas：`#f2f7f0`
+- Paper：`#fffdf7`
+- Ink：`#18332d`
+- Leaf：`#1f6b5d`
+- Coral：`#f36f50`
+- Sun：`#ffd76f`
+- Sky：`#b9ddf2`
+- Display：Georgia / Times serif；UI：系统 sans；输出：系统 monospace
+- 阴影采用 4–8px 硬边偏移，不使用模糊玻璃卡片
+- 容器混用 34px/8px 非对称圆角、细边框与虚线分隔，避免全站统一胶囊卡片
 
-- 默认态 / hover / focus / copied 成功态（按钮变绿 + 文案 1.5s）/ 空输出占位
-- `prefers-reduced-motion`：关闭过渡动画
+## 页面与组件
+
+1. Header：纸张质感、叶形字标、紧凑导航。
+2. Hero：左侧关键词 H1，右侧纯 CSS 分镜插画；无需外链图片或第三方素材。
+3. Generator：导演工作台结构；场景输入独占一行，Camera / Lighting / Audio / Style 使用 2×2 网格，移动端降为单列。
+4. Shot cards：预设使用三种浅色纸签，hover 采用硬边位移反馈。
+5. Output：深墨绿“成片板”，Text / JSON 维持原交互。
+6. FAQ：桌面端标题与问题双栏，移动端单列。
+7. Examples：桌面端双栏卡片库，移动端单列；内容和 CTA 不变。
+8. Guide / About / Legal：统一杂志式长文排版，保留全部 SEO 与合规内容。
+
+## 关键状态与可访问性
+
+- hover / focus / selected / copied 状态均有颜色以外的边框、位移或阴影反馈。
+- 保留 `prefers-reduced-motion`。
+- 正文、控件和 CTA 使用高对比深绿文字；装饰图形 `aria-hidden`。
+- 移动端导航可横向滚动，Generator 无横向溢出，主按钮扩展为全宽。
+
+## 前端 handoff
+
+- 无新增依赖、远程字体、图片或构建步骤。
+- JS 数据结构与 DOM id 不变；`app.js` 无需迁移。
+- 需要复验：桌面/移动布局、预设载入、Text/JSON 切换、Copy 状态、Examples 双栏降级。
