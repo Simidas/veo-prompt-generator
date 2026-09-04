@@ -50,8 +50,8 @@
 - **实现范围**：重做全站设计系统；首页和 Veo 3.1 Generator 重构为 Scene + 2×2 控制网格 + Shot cards；Examples 改为双栏卡片库；Guide/About/Legal 统一长文排版。
 - **功能回归**：预设载入、Text/JSON 切换、4 个 select 与输出生成通过；浏览器 console 0 error。
 - **响应式回归**：1280×900 与 375×812 通过；两种视口均无页面横向溢出；Examples 21 卡桌面双栏、移动端单栏。
-- **GitHub**：远端 `main` = `c73057851309ca673c4e05433d08a814ba66c616`；通过 Git Data API 非强制更新，发布树已逐文件核对；本地对应内容提交 `0b204cdd00cc7581f922c7459502e5c494279196`，因历史基线不同 SHA 不同。
-- **Cloudflare Pages**：Production deployment `48d4632c-d3d9-4eb3-a0a9-4d2e292d9c22`，source `c730578`，部署 URL `https://48d4632c.veo-prompt-generator.pages.dev`，生产主域 `https://veo-prompt-generator.pages.dev`。
+- **GitHub UI 源码提交**：`c73057851309ca673c4e05433d08a814ba66c616`；通过 Git Data API 非强制更新，发布树已逐文件核对；本地对应内容提交 `0b204cdd00cc7581f922c7459502e5c494279196`，因历史基线不同 SHA 不同。
+- **Cloudflare Pages 首次 UI 发布**：Production deployment `48d4632c-d3d9-4eb3-a0a9-4d2e292d9c22`，source `c730578`，部署 URL `https://48d4632c.veo-prompt-generator.pages.dev`，生产主域 `https://veo-prompt-generator.pages.dev`。
 - **生产 smoke**：`/`、6 个公开内容/法务路由、`robots.txt`、`sitemap.xml`、CSS、JS 共 11 个目标全部 200；首页命中 `hero-home` / `story-frame`，CSS 命中新 token 与响应式规则。
 - **验证边界**：生产 Chrome DOM/截图读取连续超时；已保留同构本地浏览器交互/响应式证据和生产 HTTP/部署证据，不把生产浏览器 E2E 虚报为通过。
 
