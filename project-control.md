@@ -29,10 +29,10 @@
 - 已创建并读回验证两条 CNAME：`@`、`www` → `veo-prompt-generator.pages.dev`，均已代理，TTL 自动。
 - 公共 DNS 已返回 `art.ns.cloudflare.com` / `naomi.ns.cloudflare.com`；根域和 www 的 HTTPS 均返回 200。
 - 本地 7 个 HTML 页面的 canonical、OG/JSON-LD URL（适用页面）、sitemap 的 5 个 URL 及 robots 已改为 `https://veopromptgenerator.site`。Node 检查 canonical、JSON-LD 语法、sitemap 路由存在性和 robots 通过，`git diff --check` 通过。
-- 新域名 SEO 地址变更待本次同步 GitHub、部署和生产复验；GSC 尚未验证或提交 sitemap。
+- 新域名 SEO 地址已同步 GitHub、部署并完成生产复验；GSC 已验证站点并提交 sitemap。
 - **自定义域名 SEO 发布**：GitHub main `32fcb7d3907474755eef0803342bb400891743d9`；Cloudflare Pages Production deployment `7b1ed587-c1a4-4d76-b6d8-11eece54023b`，source `32fcb7d`。
 - **生产复验**：`https://veopromptgenerator.site` 的 7 个页面、robots、sitemap、CSS、JS 共 11 个目标全部 200；首页 canonical/OG URL、robots sitemap 声明及 sitemap 5 个 URL 均指向新域名，sitemap 无 pages.dev 残留。
-- **GSC**：尚未验证站点或提交 sitemap，仍需通过 GSC 登录态完成并保存打卡截图。
+- **GSC**：已验证 `veopromptgenerator.site` 并提交 `https://veopromptgenerator.site/sitemap.xml`；截图证据为 `docs/微信图片_20260905112257_443_196.png`（状态“成功”，发现 5 个网页）。
 - 旧 `bin/bind-veo-domain.sh` 写死 `.com`，不适用于本次 `.site`，本次未执行该脚本。
 
 ## 分析埋点上线证据（2026-09-05）
@@ -82,7 +82,7 @@
 
 ## 待确认清单
 
-- [ ] GSC 验证 + 新域 sitemap 提交（Plausible 分析已于 2026-09-05 上线，测试事件 202 通过）
+- [x] GSC 验证 + 新域 sitemap 提交（截图显示状态“成功”、发现 5 个网页；Plausible 分析已于 2026-09-05 上线，测试事件 202 通过）
 - [ ] 定价拍板（$7/月 / $49 Lifetime 可在 $5–9 / $39–59 调整）
 
 ## 风险登记
@@ -100,5 +100,6 @@
 - 2026-08-25：04-compliance、05-copy freeze、06-design、开发、QA GO、Pages 生产部署、GitHub 推送（API 通道）全部完成；域名购买待用户付款确认。
 - 2026-08-25：**用户决定改用 pages.dev**。全站 canonical/OG/schema/sitemap/robots 切换为 veo-prompt-generator.pages.dev（0 残留），联系方式改 GitHub issues，重新部署并复验全路由 200，远端推送 cf6e1f2，域名自动检测任务已删除。**10-launch DONE，v1 上线闭环。**
 - 2026-09-05：完成 v1.1 UI refresh、本地桌面/移动端浏览器复验、GitHub main 同步与 Cloudflare Pages Production 发布；生产 HTTP smoke 全过，站点进入 **v1.1 LIVE**。
-- 2026-09-05：`veopromptgenerator.site` Zone、根域及 www 激活；新域名 canonical/OG/JSON-LD、robots、sitemap 同步 GitHub 并部署，11 项生产 smoke 通过；GSC 待接入。
+- 2026-09-05：`veopromptgenerator.site` Zone、根域及 www 激活；新域名 canonical/OG/JSON-LD、robots、sitemap 同步 GitHub 并部署，11 项生产 smoke 通过；GSC 已验证并提交 sitemap。
+- 2026-09-05：据 GSC 截图证据，`veopromptgenerator.site` 已完成站点验证并提交 sitemap，状态成功，发现 5 个网页。
 - 2026-09-05：全站 7 页接入自托管 Plausible 埋点（domain `veopromptgenerator.site`），隐私政策与 FAQ 措辞同步更新，测试事件 202 验证链路；GitHub main `4e69df69`（树级一致）+ Pages Production `bc4760ec`（commit `9315e23`），11 项生产 smoke 全过。**分析闭环建立，11-data-review 可启动。**
