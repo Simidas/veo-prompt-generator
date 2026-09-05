@@ -35,6 +35,16 @@
 - **GSC**：尚未验证站点或提交 sitemap，仍需通过 GSC 登录态完成并保存打卡截图。
 - 旧 `bin/bind-veo-domain.sh` 写死 `.com`，不适用于本次 `.site`，本次未执行该脚本。
 
+## 分析埋点上线证据（2026-09-05）
+
+- **埋点**：自托管 Plausible（`https://plausible.shipsolo.io/js/script.js`，data-domain `veopromptgenerator.site`），`<head>` 内 defer 加载，7 个 HTML 页面全部插入，每页恰好 1 处。
+- **合规同步**：`privacy.html` 更新 "Last updated: September 5, 2026"，新增 Analytics 章节（无 cookie、无 localStorage、聚合统计、不识别个人、不跨站追踪），"What we don't collect" 增加 analytics 无 cookie 条目，meta description 由 "no data collection" 改为 "no personal data"；`index.html` FAQ（JSON-LD + 可见文本同步）由 "no data collection" 改为 "your prompts never leave your device"，消除与埋点事实冲突的表述。
+- **数据链路验证**：`/api/event` 测试 pageview 返回 202 ok —— 站点已在 Plausible 实例注册，事件入库正常。
+- **GitHub**：远端 main `2e49a505` → `4e69df69eb14fbbd903acd5ba824e5cb63c36c57`，经 Git Data API 推送（`bin/push-via-git-data-api.mjs` 整树对齐：内容 + mode + 删除项，远端树 SHA 与本地 HEAD 树 SHA 完全一致后才移动 ref）；顺带修复 `bin/bind-veo-domain.sh` 本地 100755 / 远端 100644 的历史 mode 分歧。
+- **Cloudflare Pages**：direct upload 模式（非 Git 自动构建，部署记录中的 source commit 是 wrangler 附加的本地 HEAD 元数据）；`wrangler pages deploy site --project-name veo-prompt-generator --branch main`，Production deployment `bc4760ec-7bb5-4f54-bcb2-030d6e73dd0f`，commit `9315e231978cf220bfb825fef3860ef78a41d26a`（与源码同一 commit）。
+- **生产 smoke**：`/`、6 个内容/法务路由、robots、sitemap、CSS、JS 共 11 个目标全部 200；7 个 HTML 页面均命中埋点 script；首页 canonical 仍指向 `https://veopromptgenerator.site/`；线上 privacy 页已返回新 Analytics 文案。
+- **本地**：commit `9315e23`；`docs/` 下 3 张未跟踪截图未纳入本次提交。
+
 | 阶段 | 状态 | 备注 |
 |---|---|---|
 | 01-research | ✅ DONE | 2026-08-25；SERP 实扫降级（GK API 无公开端点）；volume/KD 标 missing_keyword_tool_access |
@@ -72,7 +82,7 @@
 
 ## 待确认清单
 
-- [ ] GA4/GSC/Clarity 数据链路（GSC 尚未验证或提交新域 sitemap）
+- [ ] GSC 验证 + 新域 sitemap 提交（Plausible 分析已于 2026-09-05 上线，测试事件 202 通过）
 - [ ] 定价拍板（$7/月 / $49 Lifetime 可在 $5–9 / $39–59 调整）
 
 ## 风险登记
@@ -91,3 +101,4 @@
 - 2026-08-25：**用户决定改用 pages.dev**。全站 canonical/OG/schema/sitemap/robots 切换为 veo-prompt-generator.pages.dev（0 残留），联系方式改 GitHub issues，重新部署并复验全路由 200，远端推送 cf6e1f2，域名自动检测任务已删除。**10-launch DONE，v1 上线闭环。**
 - 2026-09-05：完成 v1.1 UI refresh、本地桌面/移动端浏览器复验、GitHub main 同步与 Cloudflare Pages Production 发布；生产 HTTP smoke 全过，站点进入 **v1.1 LIVE**。
 - 2026-09-05：`veopromptgenerator.site` Zone、根域及 www 激活；新域名 canonical/OG/JSON-LD、robots、sitemap 同步 GitHub 并部署，11 项生产 smoke 通过；GSC 待接入。
+- 2026-09-05：全站 7 页接入自托管 Plausible 埋点（domain `veopromptgenerator.site`），隐私政策与 FAQ 措辞同步更新，测试事件 202 验证链路；GitHub main `4e69df69`（树级一致）+ Pages Production `bc4760ec`（commit `9315e23`），11 项生产 smoke 全过。**分析闭环建立，11-data-review 可启动。**
