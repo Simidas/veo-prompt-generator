@@ -7,8 +7,8 @@
 | 项 | 值 |
 |---|---|
 | 项目 slug | `veo-prompt-generator` |
-| 域名 | `veopromptgenerator.com`（Owner 已选定，2026-08-25；**未购买** → `[BLOCKED: 付款确认]`） |
-| 生产 URL（已上线） | https://veo-prompt-generator.pages.dev |
+| 域名 | `veopromptgenerator.site`（Owner 已购买；Cloudflare Zone、根域和 www 已激活） |
+| 生产 URL（已上线） | https://veopromptgenerator.site（Pages 备用域：https://veo-prompt-generator.pages.dev） |
 | 目标市场 | US / English |
 | 站点类型 | 工具站（单页交互 generator + 长尾内容页） |
 | 商业化 | v1 免费上线；v1.1 加 Pro 套餐（2026-08-25 用户确认） |
@@ -19,6 +19,18 @@
 | 上线期限 | 未指定 |
 
 ## 阶段状态
+
+### 自定义域名接入（2026-09-05）
+
+- Owner 授权配置 Cloudflare，Spaceship 名称服务器由 Owner 手动修改。
+- Zone：`veopromptgenerator.site`，ID `10c420b26a207684915ad193a27a54a7`，API 复核状态 `active`。
+- 分配的 Nameserver：`art.ns.cloudflare.com`、`naomi.ns.cloudflare.com`。
+- Pages 项目 `veo-prompt-generator` 已添加根域和 `www.veopromptgenerator.site`；API 复核两者及 HTTP 验证均为 `active`。
+- 已创建并读回验证两条 CNAME：`@`、`www` → `veo-prompt-generator.pages.dev`，均已代理，TTL 自动。
+- 公共 DNS 已返回 `art.ns.cloudflare.com` / `naomi.ns.cloudflare.com`；根域和 www 的 HTTPS 均返回 200。
+- 本地 7 个 HTML 页面的 canonical、OG/JSON-LD URL（适用页面）、sitemap 的 5 个 URL 及 robots 已改为 `https://veopromptgenerator.site`。Node 检查 canonical、JSON-LD 语法、sitemap 路由存在性和 robots 通过，`git diff --check` 通过。
+- 新域名 SEO 地址变更待本次同步 GitHub、部署和生产复验；GSC 尚未验证或提交 sitemap。
+- 旧 `bin/bind-veo-domain.sh` 写死 `.com`，不适用于本次 `.site`，本次未执行该脚本。
 
 | 阶段 | 状态 | 备注 |
 |---|---|---|
@@ -57,9 +69,8 @@
 
 ## 待确认清单
 
-- [ ] GA4/GSC/Clarity 数据链路（pages.dev 域可直接配置，GSC 需 DNS 验证或 HTML 标记验证）
+- [ ] GA4/GSC/Clarity 数据链路（GSC 尚未验证或提交新域 sitemap）
 - [ ] 定价拍板（$7/月 / $49 Lifetime 可在 $5–9 / $39–59 调整）
-- [ ] 未来若购买自定义域名：重跑 `bin/bind-veo-domain.sh` 并把 canonical 切回（脚本保留在仓库）
 
 ## 风险登记
 
